@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dimen_user_cards_width"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradien_background">
+
+        <ImageView
+            android:id="@+id/fitness_club_icon"
+            android:layout_width="@dimen/fitness_icon_in_card_width"
+            android:layout_height="@dimen/fitness_icon_in_card_height"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:contentDescription="fitness_club_icon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fitness_club_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/dimen_8dp"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@id/fitness_club_icon"
+            app:layout_constraintStart_toStartOf="@id/fitness_club_icon"
+            app:layout_constraintTop_toBottomOf="@id/fitness_club_icon">
+
+            <ImageView
+                android:id="@+id/card_qr"
+                android:layout_width="@dimen/qr_size_in_card"
+                android:layout_height="@dimen/qr_size_in_card"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/qr_icon" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/fitness_club_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/fitness_club_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fitness_club_icon" />
+
+        <TextView
+            android:id="@+id/card_type"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/fitness_club_title"
+            app:layout_constraintStart_toStartOf="@id/fitness_club_title"
+            app:layout_constraintTop_toBottomOf="@id/fitness_club_title" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_status_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="@dimen/dimen_5dp"
+            app:layout_constraintStart_toStartOf="@id/fitness_club_title"
+            app:layout_constraintTop_toBottomOf="@id/card_type">
+
+            <LinearLayout
+                android:id="@+id/card_status_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/card_status_active_color">
+
+                <TextView
+                    android:id="@+id/isActiveText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dimen_6dp"
+                    android:layout_marginVertical="3dp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/card_valid_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/fitness_club_title"
+            app:layout_constraintStart_toStartOf="@id/fitness_club_title"
+            app:layout_constraintTop_toBottomOf="@id/card_status_card_view" />
+
+        <TextView
+            android:id="@+id/lessons_left_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_8dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/fitness_club_title"
+            app:layout_constraintStart_toStartOf="@id/fitness_club_title"
+            app:layout_constraintTop_toBottomOf="@id/card_valid_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/personal_manager_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_personal_card_view_height"
+        android:layout_margin="@dimen/dimen_16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/my_personal_manager_text"
+                android:layout_width="@dimen/dimen_zero_dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_12dp"
+                android:text="@string/personal_manager_text"
+                android:textSize="@dimen/dimen_18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/personal_managers_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/personal_managers_arrow"
+                android:layout_width="@dimen/dimen_manager_arrow_width"
+                android:layout_height="@dimen/dimen_manager_arrow_height"
+                android:layout_marginEnd="@dimen/dimen_12dp"
+                android:src="@drawable/right_arrow_ic"
+                app:layout_constraintBottom_toBottomOf="@id/my_personal_manager_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/my_personal_manager_text" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/personal_manager_image"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/my_personal_manager_text"
+                app:layout_constraintTop_toBottomOf="@id/my_personal_manager_text" />
+
+
+            <TextView
+                android:id="@+id/personal_manager_name_text"
+                android:layout_width="@dimen/dimen_manager_name_text_width"
+                android:layout_height="@dimen/dimen_zero_dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                app:layout_constraintBottom_toBottomOf="@id/personal_manager_image"
+                app:layout_constraintStart_toEndOf="@id/personal_manager_image"
+                app:layout_constraintTop_toTopOf="@id/personal_manager_image" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/my_family_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_my_family_height"
+        android:layout_marginHorizontal="@dimen/dimen_16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dimen_12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/family_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:text="@string/my_family_text"
+                android:textSize="@dimen/dimen_18sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dimen_16dp">
+
+        <TextView
+            android:id="@+id/own_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:text="@string/personal_text"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/owns_arrow"
+            android:layout_width="@dimen/dimen_manager_arrow_width"
+            android:layout_height="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:src="@drawable/right_arrow_ic"
+            app:layout_constraintBottom_toBottomOf="@id/own_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/own_text" />
+
+        <HorizontalScrollView
+            android:id="@+id/own_cards_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/own_text">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/pay_card"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/rubl_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/for_pay_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_services_card"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_marginVertical="@dimen/dimen_8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/service_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/services_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_family_card"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/family_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/my_family_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_family_etc_card"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_marginVertical="@dimen/dimen_8dp"
+                    android:layout_marginEnd="@dimen/dimen_8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/family_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/etc_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/my_club_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12dp"
+            android:text="@string/my_club_text"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/my_club_arrow"
+            android:layout_width="@dimen/dimen_manager_arrow_width"
+            android:layout_height="@dimen/dimen_manager_arrow_height"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:src="@drawable/right_arrow_ic"
+            app:layout_constraintBottom_toBottomOf="@id/my_club_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/my_club_text" />
+
+        <HorizontalScrollView
+            android:id="@+id/my_club_cards_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_club_text">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/store_card_view"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_margin="@dimen/dimen_8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/cart_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/market_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/team_card_view"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_marginVertical="@dimen/dimen_8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/team_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/team_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/note_card_view"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/calendar_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/note_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_note_etc_card"
+                    style="@style/ServicesCardViewStyle"
+                    android:layout_marginVertical="@dimen/dimen_8dp"
+                    android:layout_marginEnd="@dimen/dimen_8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/calendar_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/etc_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:lineSpacingExtra="@dimen/line_spacing_extra"
+        android:text="@string/use_rules_text"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginBottom="50dp"
+        android:lineSpacingExtra="@dimen/line_spacing_extra"
+        android:text="@string/kit_version_text"
+        android:textColor="@color/grey" />
+
+</LinearLayout>

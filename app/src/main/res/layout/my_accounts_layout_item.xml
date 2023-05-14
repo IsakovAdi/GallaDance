@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dimen_accounts_item_width"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/account_icon"
+            android:layout_width="@dimen/dimen_account_icon_size"
+            android:layout_height="@dimen/dimen_account_icon_size"
+            android:layout_margin="@dimen/dimen_14dp"
+            android:src="@drawable/money_icon"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/account_sum_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_12dp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/account_icon"
+            app:layout_constraintTop_toTopOf="@+id/account_icon" />
+
+        <TextView
+            android:id="@+id/account_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/account_sum_text"
+            app:layout_constraintStart_toStartOf="@id/account_sum_text"
+            app:layout_constraintTop_toBottomOf="@id/account_sum_text" />
+
+        <TextView
+            android:id="@+id/club_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12dp"
+            android:singleLine="true"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/account_sum_text"
+            app:layout_constraintStart_toStartOf="@id/account_sum_text"
+            app:layout_constraintTop_toBottomOf="@id/account_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

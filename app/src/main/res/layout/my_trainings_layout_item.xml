@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/user_tarinings_item_width"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/training_type_image_view"
+            android:layout_width="@dimen/dimen_6dp"
+            android:layout_height="0dp"
+            android:background="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/training_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:singleLine="true"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/training_type_image_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/training_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintStart_toStartOf="@id/training_title"
+            app:layout_constraintTop_toBottomOf="@id/training_title" />
+
+        <TextView
+            android:id="@+id/training_space_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="@id/training_date_text"
+            app:layout_constraintEnd_toEndOf="@id/training_title"
+            app:layout_constraintStart_toEndOf="@id/training_date_text"
+            app:layout_constraintTop_toTopOf="@id/training_date_text" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/coach_image"
+            android:layout_width="@dimen/dimen_16dp"
+            android:layout_height="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginBottom="@dimen/dimen_12dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/training_date_text"
+            app:layout_constraintTop_toBottomOf="@id/training_date_text" />
+
+        <TextView
+            android:id="@+id/coach_name_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:singleLine="true"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="@id/coach_image"
+            app:layout_constraintEnd_toEndOf="@id/training_title"
+            app:layout_constraintStart_toEndOf="@id/coach_image"
+            app:layout_constraintTop_toTopOf="@id/coach_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

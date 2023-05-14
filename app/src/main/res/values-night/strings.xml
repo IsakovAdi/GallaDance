@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="challenge_desc_text">Победители получат подарочные сертификаты на 2000, 1500, 1000 рублей и фирменные браслеты</string>
+    <string name="use_rules_text">При регистрации в приложении вы согласились на обработку персональных данных, с условиями публичной оферты и политикой конфиденциальности</string>
+    <string name="personal_manager_text">Персональный менеджер</string>
+    <string name="my_family_text">Моя семья</string>
+    <string name="personal_text">Личное</string>
+    <string name="for_pay_text">На оплату</string>
+    <string name="services_text">Мои услуги</string>
+    <string name="etc_text">Еще</string>
+    <string name="my_club_text">Мой клуб</string>
+    <string name="market_text">Магазин</string>
+    <string name="team_text">Команда</string>
+    <string name="note_text">Запись</string>
+    <string name="kit_version_text">Версия 6.3.2 FitnessKit</string>
+    <string name="soon_text">Скоро</string>
+    <string name="change_text">Изменить</string>
+    <string name="my_accounts_text">Мои счета</string>
+    <string name="my_challenges_text">Мои челленджи</string>
+    <string name="user_club_cards_text">Мои клубные карты</string>
+    <string name="user_friends_text">Мои друзья</string>
+    <string name="user_trainings_text">Мои тренировки</string>
+    <string name="now_in_club_text">Сейчас в клубе</string>
+</resources>
