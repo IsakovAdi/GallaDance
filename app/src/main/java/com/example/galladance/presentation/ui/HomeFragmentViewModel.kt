@@ -1,15 +1,14 @@
 package com.example.galladance.presentation.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.galladance.data.cloud.base.ResourceProvider
-import com.example.galladance.data.cloud.example.ExampleApi
-import com.example.galladance.data.cloud.models.*
 import com.example.galladance.domain.Mapper
-import com.example.galladance.domain.interactors.SignInUseCase
+import com.example.galladance.domain.interactors.cloud.SignInUseCase
+import com.example.galladance.domain.interactors.storage.GetSettingsStateUseCase
+import com.example.galladance.domain.interactors.storage.SaveSettingsStateUseCase
+import com.example.galladance.domain.models.SettingsState
 import com.example.galladance.domain.models.User
 import com.example.galladance.presentation.models.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,10 @@ import kotlin.random.Random
 class HomeFragmentViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val mapper: Mapper<User, UserUi>,
-    private val resourceProvider: ResourceProvider,
+    private val saveSettings: SaveSettingsStateUseCase,
+    private val getSettingsState: GetSettingsStateUseCase,
+    private val mapSettingsStateToUi: Mapper<SettingsState, SettingsStateUi>,
+    private val mapSettingsStateToDomain: Mapper<SettingsStateUi, SettingsState>,
 ) : ViewModel() {
 
     private val _error: MutableLiveData<String> = MutableLiveData()
@@ -57,6 +59,16 @@ class HomeFragmentViewModel @Inject constructor(
     private val _isChallengeVisible: MutableLiveData<Boolean> = MutableLiveData(true)
     val isChallengeVisible: LiveData<Boolean> get() = _isChallengeVisible
 
+    private val _settingsState: MutableLiveData<SettingsStateUi> =
+        MutableLiveData(SettingsStateUi())
+    val settingsState: LiveData<SettingsStateUi> get() = _settingsState
+
+    init {
+        viewModelScope.launch {
+            _settingsState.value = mapSettingsStateToUi.map(getSettingsState.invoke())
+        }
+    }
+
     fun signIn(login: String, password: String) = viewModelScope.launch {
         _user.value = mapper.map(signInUseCase(login = login, password = password))
         initLiveDates()
@@ -64,27 +76,13 @@ class HomeFragmentViewModel @Inject constructor(
 
     private fun initLiveDates() {
         _user.value.apply {
-            _nowInClub.value = if (getTurn()) {
-                this?.fitnessClub?.inClub ?: emptyList()
-            } else emptyList()
-            _challenge.value = if (getTurn()) {
-                this?.fitnessClub?.challenges
-            } else null
-            _userChallenges.value = if (getTurn()) {
-                this?.challenges
-            } else emptyList()
-            _userCards.value = if (getTurn()) {
-                this?.clubCards
-            } else emptyList()
-            _userAccounts.value = if (getTurn()) {
-                this?.accounts
-            } else emptyList()
-            _userLessons.value = if (getTurn()) {
-                this?.lessons
-            } else emptyList()
-            _userFriends.value = if (getTurn()) {
-                this?.userFriends
-            } else emptyList()
+            _nowInClub.value = this?.fitnessClub?.inClub ?: emptyList()
+            _challenge.value = this?.fitnessClub?.challenges
+            _userChallenges.value = this?.challenges
+            _userCards.value = this?.clubCards
+            _userAccounts.value = this?.accounts
+            _userLessons.value = this?.lessons
+            _userFriends.value = this?.userFriends
             _fitnessClub.value = this?.fitnessClub
         }
     }
@@ -93,8 +91,31 @@ class HomeFragmentViewModel @Inject constructor(
         _isChallengeVisible.value = _isChallengeVisible.value != true
     }
 
-    private fun getTurn(): Boolean {
-        val r = Random.nextInt(0, 10)
-        return r % 2 == 0
+    fun changeStates(
+        nowInClubState: Boolean,
+        newChallengeState: Boolean,
+        userChallengesState: Boolean,
+        userCardsState: Boolean,
+        userAccountsState: Boolean,
+        userTrainingsState: Boolean,
+        userFriendsState: Boolean,
+    ) {
+        _settingsState.value = SettingsStateUi(
+            nowInClubVisibility = nowInClubState,
+            newChallengeVisibility = newChallengeState,
+            userChallengesVisibility = userChallengesState,
+            userCardsVisibility = userCardsState,
+            userAccountsVisibility = userAccountsState,
+            userTrainingsVisibility = userTrainingsState,
+            userFriendsVisibility = userFriendsState,
+        )
+        viewModelScope.launch {
+            saveSettingsState()
+        }
     }
+
+    private fun saveSettingsState() = viewModelScope.launch {
+        saveSettings(mapSettingsStateToDomain.map(_settingsState.value!!))
+    }
+
 }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BottomSheetDialogCardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/dimen_10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/now_in_club_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/now_in_club_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/new_challenges_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/new_challenge_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/user_challenges_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/my_challenges_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/user_cards_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/user_club_cards_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/user_accounts_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/my_accounts_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/user_trainings_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/user_trainings_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/user_friends_switch"
+            android:layout_width="@dimen/switches_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/user_friends_text"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_40dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_btn"
+                style="@style/ButtonStyle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_16dp"
+                android:text="Отменить"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/red"
+                app:icon="@drawable/ic_cancel"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/save_btn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_btn"
+                style="@style/ButtonStyle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/save_text"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/green"
+                app:icon="@drawable/ic_check"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/cancel_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cancel_btn"
+                app:layout_constraintTop_toTopOf="@id/cancel_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

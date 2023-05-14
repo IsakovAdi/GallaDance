@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.galladance.R
 import com.example.galladance.databinding.FragmentHomeBinding
+import com.example.galladance.databinding.SettingsDialogItemBinding
 import com.example.galladance.presentation.ui.HomeFragmentViewModel
 import com.example.galladance.presentation.ui.adapters.account.AccountAdapter
 import com.example.galladance.presentation.ui.adapters.friends.FriendsAdapter
@@ -19,6 +20,8 @@ import com.example.galladance.presentation.ui.adapters.lesson.LessonAdapter
 import com.example.galladance.presentation.ui.adapters.nowInClub.NowInClubAdapter
 import com.example.galladance.presentation.ui.adapters.userCard.CardsAdapter
 import com.example.galladance.presentation.ui.adapters.userChallenges.UserChallengesAdapter
+import com.example.galladance.presentation.ui.makeView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -69,13 +72,13 @@ class HomeFragment : Fragment() {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.search -> {
-                        Log.d("MY_LOG", "Search")
+                        makeToast("Search")
                     }
                     R.id.settings -> {
-                        Log.d("MY_LOG", "settings")
+                        openDialog()
                     }
                     R.id.notifications -> {
-                        Log.d("MY_LOG", "notif")
+                        makeToast("Notifications")
                     }
                 }
                 return true
@@ -115,66 +118,60 @@ class HomeFragment : Fragment() {
         observeIsChallengeVisible()
         observeFitnessClub()
         observeError()
+        observeSettingsState()
     }
 
     private fun observeUserFriends() {
         viewModel.userFriends.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.myFriendsLayout.apply {
-                    root.visibility = View.VISIBLE
                     friendsAdapter.users = it
                     myFriendsCount.text = (it.size).toString()
                     if (it.size > FriendsAdapter.limit) {
                         moreThanTenFriendsText.text = "+ ${(it.size - FriendsAdapter.limit)}"
                     }
                 }
-            } else binding.myFriendsLayout.root.visibility = View.GONE
+            }
         }
     }
 
     private fun observeNowInClub() {
         viewModel.nowInClub.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.nowInClubLayout.root.visibility = View.VISIBLE
                 nowInClubAdapter.users = it
                 binding.nowInClubLayout.nowInClubCountText.text = (it.size).toString()
-            } else binding.nowInClubLayout.root.visibility = View.GONE
+            }
         }
     }
 
     private fun observeUserChallenges() {
         viewModel.userChallenges.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.myChallengesLayout.root.visibility = View.VISIBLE
                 userChallengesAdapter.challenges = it
-            } else binding.myChallengesLayout.root.visibility = View.GONE
+            }
         }
     }
 
     private fun observeUserClubCards() {
         viewModel.userClubCards.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.myClubCardsLayout.root.visibility = View.VISIBLE
                 userClubCardsAdapter.cards = it
-            } else binding.myClubCardsLayout.root.visibility = View.GONE
+            }
         }
     }
 
     private fun observeUserAccounts() {
         viewModel.userAccounts.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                binding.myAccountsL.root.visibility = View.VISIBLE
+            if (it.isNotEmpty())
                 accountAdapter.accounts = it
-            } else binding.myAccountsL.root.visibility = View.GONE
         }
     }
 
     private fun observeLessons() {
         viewModel.userLessons.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.myTrainingsLayout.root.visibility = android.view.View.VISIBLE
                 lessonsAdapter.submitList(it)
-            } else binding.myTrainingsLayout.root.visibility = android.view.View.GONE
+            }
         }
     }
 
@@ -182,7 +179,6 @@ class HomeFragment : Fragment() {
         viewModel.newChallenge.observe(viewLifecycleOwner) {
             binding.challengeLayout.apply {
                 if (it != null) {
-                    binding.challengeLayout.root.visibility = View.VISIBLE
                     challengeIcon.setImageResource(it.icon)
                     challengeTitleText.text = it.title
                     challengeDateText.text = "Старт через ${startAfterDays(it.startDate)} дней"
@@ -191,8 +187,6 @@ class HomeFragment : Fragment() {
                     challengeTypeText.text = it.requirements
                     challengeImage.setImageResource(it.image)
                     challengeDescText.text = it.description
-                } else {
-                    this.root.visibility = View.GONE
                 }
             }
         }
@@ -270,6 +264,66 @@ class HomeFragment : Fragment() {
 
     private fun makeToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun observeSettingsState() {
+        viewModel.settingsState.observe(viewLifecycleOwner) {
+            binding.apply {
+                nowInClubLayout.root.visibility =
+                    if (it.nowInClubVisibility) View.VISIBLE else View.GONE
+                challengeLayout.root.visibility =
+                    if (it.newChallengeVisibility) View.VISIBLE else View.GONE
+                myChallengesLayout.root.visibility =
+                    if (it.userChallengesVisibility) View.VISIBLE else View.GONE
+                myClubCardsLayout.root.visibility =
+                    if (it.userCardsVisibility) View.VISIBLE else View.GONE
+                myAccountsL.root.visibility =
+                    if (it.userAccountsVisibility) View.VISIBLE else View.GONE
+                myTrainingsLayout.root.visibility =
+                    if (it.userTrainingsVisibility) View.VISIBLE else View.GONE
+                myFriendsLayout.root.visibility =
+                    if (it.userFriendsVisibility) View.VISIBLE else View.GONE
+            }
+        }
+    }
+
+    private fun openDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val bin =
+            SettingsDialogItemBinding.bind(R.layout.settings_dialog_item.makeView(binding.root))
+        viewModel.settingsState.observe(viewLifecycleOwner) {
+            bin.apply {
+                nowInClubSwitch.isChecked = it.nowInClubVisibility
+                newChallengesSwitch.isChecked = it.newChallengeVisibility
+                userChallengesSwitch.isChecked = it.userChallengesVisibility
+                userCardsSwitch.isChecked = it.userCardsVisibility
+                userAccountsSwitch.isChecked = it.userAccountsVisibility
+                userTrainingsSwitch.isChecked = it.userTrainingsVisibility
+                userFriendsSwitch.isChecked = it.userFriendsVisibility
+            }
+        }
+        bin.apply {
+            saveBtn.setOnClickListener {
+                viewModel.changeStates(
+                    nowInClubState = nowInClubSwitch.isChecked,
+                    newChallengeState = newChallengesSwitch.isChecked,
+                    userChallengesState = userChallengesSwitch.isChecked,
+                    userCardsState = userCardsSwitch.isChecked,
+                    userAccountsState = userAccountsSwitch.isChecked,
+                    userTrainingsState = userTrainingsSwitch.isChecked,
+                    userFriendsState = userFriendsSwitch.isChecked,
+                )
+                dialog.dismiss()
+            }
+            cancelBtn.setOnClickListener {
+                makeToast("Изменения не сохранены")
+                dialog.dismiss()
+            }
+        }
+
+        dialog.setCancelable(true)
+        dialog.setContentView(bin.root)
+        dialog.show()
     }
 
 }

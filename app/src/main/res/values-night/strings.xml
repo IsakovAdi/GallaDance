@@ -21,4 +21,6 @@
     <string name="user_friends_text">Мои друзья</string>
     <string name="user_trainings_text">Мои тренировки</string>
     <string name="now_in_club_text">Сейчас в клубе</string>
+    <string name="new_challenge_text">Новый челлендж</string>
+    <string name="save_text">Сохранить</string>
 </resources>

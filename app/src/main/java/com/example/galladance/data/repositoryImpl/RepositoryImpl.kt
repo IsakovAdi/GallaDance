@@ -1,8 +1,7 @@
 package com.example.galladance.data.repositoryImpl
 
-import com.example.galladance.data.cloud.source.CloudDataSource
+import com.example.galladance.data.cloud.source.cloud.CloudDataSource
 import com.example.galladance.data.models.UserData
-import com.example.galladance.domain.DataRequestState
 import com.example.galladance.domain.Mapper
 import com.example.galladance.domain.models.User
 import com.example.galladance.domain.repositories.Repository

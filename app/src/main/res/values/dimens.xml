@@ -36,4 +36,5 @@
     <dimen name="user_friends_rv_width">220dp</dimen>
     <dimen name="user_tarinings_item_width">220dp</dimen>
     <dimen name="now_in_club_item_image_size">32dp</dimen>
+    <dimen name="switches_width">220dp</dimen>
 </resources>
